@@ -1,3 +1,5 @@
+import React, { useState } from "react";
+
 function NewTaskForm({ categories, onTaskFormSubmit }) {
   const [taskText, setTaskText] = useState("");
   const [taskCategory, setTaskCategory] = useState(categories[0]);
@@ -6,10 +8,11 @@ function NewTaskForm({ categories, onTaskFormSubmit }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onTaskFormSubmit({
+    const newTask = {
       text: taskText,
-      category: taskCategory
-    });
+      category: taskCategory,
+    };
+    onTaskFormSubmit(newTask);
     setTaskText("");
     setTaskCategory(filteredCategories[0]);
   };
@@ -37,7 +40,12 @@ function NewTaskForm({ categories, onTaskFormSubmit }) {
           ))}
         </select>
       </label>
-      <input type="submit" value="Add task" />
+      <input
+        type="submit"
+        value="Add task"
+      />
     </form>
   );
 }
+
+export default NewTaskForm;
